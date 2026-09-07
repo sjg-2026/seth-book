@@ -12,7 +12,8 @@
 html{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 body{background:var(--room);color:#E8E4DA;font-family:"Libre Caslon Text",Georgia,serif;line-height:1.65;font-size:16px}
-button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;transition:transform .15s ease}
+button:active{transform:scale(.96)}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .wrap{max-width:1080px;margin:0 auto;padding:0 1.2rem}
 /* marquee header */
@@ -31,9 +32,9 @@ header{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#10
 nav{position:sticky;top:0;z-index:50;background:#10131AEE;backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
 .tabs{display:flex;gap:.2rem;overflow-x:auto;padding:.5rem .6rem}
 .tab{font-family:Oswald;font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;
-padding:.55rem .9rem;color:var(--mut);border-radius:3px;white-space:nowrap}
+padding:.55rem .9rem;color:var(--mut);border-radius:3px;white-space:nowrap;transition:transform .15s,color .15s,background .15s}
 .tab[aria-selected="true"]{color:var(--ink);background:var(--gold)}
-.tab:hover{color:#fff}.tab[aria-selected="true"]:hover{color:var(--ink)}
+.tab:hover{color:#fff;transform:translateY(-2px)}.tab[aria-selected="true"]:hover{color:var(--ink)}
 main{padding:2.4rem 0 4rem}
 .panel{display:none}.panel.on{display:block}
 h2.sec{font-family:Oswald;font-weight:600;letter-spacing:.2em;text-transform:uppercase;font-size:1rem;color:var(--gold);margin-bottom:.4rem}
@@ -57,7 +58,8 @@ padding:.8rem 1.3rem;border:1px solid var(--line);border-radius:4px;color:#E8E4D
 .fork-roster{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-top:.9rem}
 .chip{font-family:Oswald;font-weight:300;letter-spacing:.08em;font-size:.7rem;padding:.3rem .65rem;
 border:1px solid var(--line);border-radius:999px;color:var(--mut)}
-.chip button{text-decoration:underline dotted;color:#E8E4DA}
+.chip button{text-decoration:underline dotted;color:#E8E4DA;transition:color .15s,transform .15s;display:inline-block}
+.chip button:hover{color:var(--gold);transform:translateY(-1px)}
 /* timeline */
 .strip{display:flex;gap:.9rem;overflow-x:auto;padding:1.4rem .2rem 1.8rem;scroll-snap-type:x mandatory}
 .frame{scroll-snap-align:start;flex:0 0 215px;background:var(--paper);color:var(--ink);border-radius:4px;
@@ -69,16 +71,41 @@ background-image:radial-gradient(circle,var(--paper) 2.4px,transparent 2.6px);ba
 .frame .nm{font-weight:700;font-size:.98rem;line-height:1.3}
 .frame .wk{font-style:italic;font-size:.82rem;color:#5d5547}
 .frame .more{font-family:Oswald;letter-spacing:.14em;font-size:.62rem;text-transform:uppercase;color:var(--screen);margin-top:.5rem;display:inline-block}
-.frame:hover{transform:translateY(-3px)}.frame{transition:transform .15s}
+.frame:hover{transform:translateY(-6px) scale(1.015)}.frame{transition:transform .22s cubic-bezier(.2,.8,.3,1),box-shadow .22s}
+.frame:active{transform:translateY(-2px) scale(.99)}
+.tl-legend{display:flex;gap:1.1rem;flex-wrap:wrap;margin:0 .2rem 1.2rem;font-family:Oswald;font-weight:500;
+font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.tl-legend span{display:inline-flex;align-items:center;gap:.4rem}
+.tl-legend i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 auto}
+.tl-item{display:flex;flex-direction:column;flex:0 0 215px;scroll-snap-align:start}
+.tl-dot-row{position:relative;width:100%;height:20px;display:flex;align-items:center;justify-content:center}
+.tl-dot-row::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line);transform:translateY(-50%)}
+.tl-dot{position:relative;z-index:1;width:13px;height:13px;border-radius:50%;border:2px solid var(--room);
+box-shadow:0 0 0 1px currentColor;transition:transform .2s}
+.tl-item:hover .tl-dot{transform:scale(1.35)}
+.tl-dot.v-Good{background:var(--green);color:var(--green)}
+.tl-dot.v-Gray{background:#8a6d1f;color:#8a6d1f}
+.tl-dot.v-Dark{background:var(--red);color:var(--red)}
+.tl-dot.v-Tragic{background:#5a4a7a;color:#5a4a7a}
+.tl-dot.v-Honorary{background:var(--screen);color:var(--screen)}
+.tl-gap{flex:0 0 auto;display:flex;flex-direction:column;align-items:center}
+.tl-gap .tl-line-row{position:relative;width:100%;min-width:26px;height:20px}
+.tl-gap .tl-line-row::before{content:"";position:absolute;left:0;right:0;top:50%;height:2px;background:var(--line);transform:translateY(-50%)}
+.tl-gap .tl-decade{font-family:Oswald;font-weight:600;font-size:.7rem;letter-spacing:.1em;color:var(--gold);
+white-space:nowrap;margin-top:.55rem}
+.tl-gap .tl-tag{font-family:Oswald;font-weight:500;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+color:var(--mut);white-space:nowrap;margin-top:.15rem}
 /* case files */
 .filters{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.4rem}
 .flt{font-family:Oswald;font-weight:500;letter-spacing:.12em;font-size:.68rem;text-transform:uppercase;
-padding:.45rem .85rem;border:1px solid var(--line);border-radius:999px;color:var(--mut)}
+padding:.45rem .85rem;border:1px solid var(--line);border-radius:999px;color:var(--mut);transition:transform .15s,border-color .15s,color .15s}
+.flt:hover{transform:translateY(-2px);border-color:var(--screen);color:#fff}
 .flt.sel{background:var(--screen);border-color:var(--screen);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:1rem}
 .card{background:var(--paper);color:var(--ink);border-radius:4px;padding:1.05rem 1rem .95rem;text-align:left;
 box-shadow:0 6px 16px #0007;position:relative;transition:transform .15s}
 .card:hover{transform:translateY(-3px) rotate(-.4deg)}
+.card:active{transform:translateY(-1px) rotate(-.2deg) scale(.99)}
 .card .file{font-family:"Special Elite";font-size:.66rem;color:#8a7f6c;letter-spacing:.06em}
 .card h3{font-size:1.05rem;line-height:1.25;margin:.15rem 0 0}
 .card .wk{font-style:italic;font-size:.84rem;color:#5d5547}
@@ -105,7 +132,8 @@ max-height:85vh;overflow:auto;position:relative}
 /* book reader */
 .parts{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.2rem}
 .chl{border:1px solid var(--line);border-radius:6px;margin-bottom:.55rem;background:var(--room2);overflow:hidden}
-.chl>button{width:100%;display:flex;align-items:baseline;gap:.9rem;padding:.85rem 1rem;text-align:left}
+.chl>button{width:100%;display:flex;align-items:baseline;gap:.9rem;padding:.85rem 1rem;text-align:left;transition:background .15s,padding-left .15s}
+.chl>button:hover{background:var(--paper2);padding-left:1.25rem}
 .chl .lab{font-family:Oswald;font-weight:600;letter-spacing:.12em;font-size:.66rem;text-transform:uppercase;color:var(--gold);min-width:78px}
 .chl .ti{font-size:.98rem}
 .chl .arrow{margin-left:auto;color:var(--mut);font-family:Oswald;transition:transform .2s}
@@ -188,7 +216,8 @@ table.big{width:100%;border-collapse:collapse}
 /* theme picker */
 .tpick{position:fixed;right:14px;bottom:14px;z-index:200;display:flex;gap:6px;
  background:#101318E6;padding:8px 10px;border-radius:999px;border:1px solid #ffffff22;}
-.tpick button{width:26px;height:26px;border-radius:50%;border:2px solid #ffffff55;padding:0;}
+.tpick button{width:26px;height:26px;border-radius:50%;border:2px solid #ffffff55;padding:0;transition:transform .15s,border-color .15s;}
+.tpick button:hover{transform:scale(1.2);border-color:#ffffffaa;}
 .tpick button[aria-pressed="true"]{border-color:#fff;transform:scale(1.12);}
 .tpick .t-marquee{background:linear-gradient(135deg,#171B21 50%,#C9A227 50%);}
 .tpick .t-grid{background:linear-gradient(135deg,#04070D 50%,#E6482E 50%);}
@@ -233,10 +262,10 @@ footer{border-top:1px solid var(--line);text-align:center;padding:1.6rem;color:v
 @media(max-width:560px){.mq h1{letter-spacing:.04em}}
 </style>
 </head>
-<body>
+<body data-theme="cabot">
 <header>
   <div class="mq">
-    <p class="eyebrow">Now Playing &middot; The Interactive Edition</p>
+    <p class="eyebrow">🎬 Now Playing &middot; The Interactive Edition</p>
     <h1>THE NAME GAME</h1>
     <p class="sub">What Hollywood thinks about Seth — the whole book, in bite-size pieces</p>
     <p class="downloads"><a href="book.html">Read the Book Edition</a><span>&middot;</span><a href="The-Name-Game-Book.pdf">Download PDF</a></p>
@@ -246,32 +275,39 @@ footer{border-top:1px solid var(--line);text-align:center;padding:1.6rem;color:v
 </header>
 <main class="wrap">
   <section class="panel" id="p-board" role="tabpanel">
-    <h2 class="sec">The Board</h2>
+    <h2 class="sec">🎯 The Board</h2>
     <p class="lead">Forty years of screenwriting (plus a 1940 head start) arrived at one rule: Hollywood casts Seth as the brain — and then makes him choose. Here's the whole case, by the numbers.</p>
     <div class="stats" id="stats"></div>
     <div class="fork">
       <h3>THE FORK</h3>
       <p class="q">Every screen Seth gets one question: <em>who does your intelligence serve?</em> Choose.</p>
       <div class="dial" id="dial">
-        <button data-f="people">Serve People</button>
-        <button data-f="system">Serve the System</button>
-        <button data-f="self">Serve Yourself</button>
+        <button data-f="people">🤝 Serve People</button>
+        <button data-f="system">🏛️ Serve the System</button>
+        <button data-f="self">😈 Serve Yourself</button>
       </div>
       <div class="verdict" id="fverdict">Make your choice. The canon has already judged it.</div>
       <div class="fork-roster" id="froster"></div>
     </div>
-    <h2 class="sec">The Sentence</h2>
+    <h2 class="sec">💬 The Sentence</h2>
     <p class="lead" style="font-size:1.05rem;color:#E8E4DA"><em>"Seth: clever, a little neurotic, more likable than dangerous — but watch him around unchecked power."</em></p>
   </section>
 
   <section class="panel" id="p-timeline" role="tabpanel">
-    <h2 class="sec">The Timeline</h2>
-    <p class="lead">1940 to 2025 — every major Seth, on one strip of film. Scroll sideways; tap any frame to open its case file.</p>
+    <h2 class="sec">🎞️ The Timeline</h2>
+    <p class="lead">1940 to 2025 — every major Seth, on one strip of film. Scroll sideways; tap any frame to open its case file. Dot color marks how it ends for them; gaps are drawn to scale.</p>
+    <div class="tl-legend">
+      <span><i class="tl-dot v-Good"></i>Good</span>
+      <span><i class="tl-dot v-Gray"></i>Gray</span>
+      <span><i class="tl-dot v-Dark"></i>Dark</span>
+      <span><i class="tl-dot v-Tragic"></i>Tragic</span>
+      <span><i class="tl-dot v-Honorary"></i>Honorary</span>
+    </div>
     <div class="strip" id="strip"></div>
   </section>
 
   <section class="panel" id="p-files" role="tabpanel">
-    <h2 class="sec">Case Files</h2>
+    <h2 class="sec">🗂️ Case Files</h2>
     <p class="lead">Two dozen dossiers from the Seth canon. Filter the board; tap a card for the full file.</p>
     <div class="filters" id="fmed"></div>
     <div class="filters" id="fver"></div>
@@ -279,32 +315,32 @@ footer{border-top:1px solid var(--line);text-align:center;padding:1.6rem;color:v
   </section>
 
   <section class="panel" id="p-book" role="tabpanel">
-    <h2 class="sec">Read the Book</h2>
+    <h2 class="sec">📖 Read the Book</h2>
     <p class="lead">All 21 chapters and the outro — the complete text, one expandable file at a time.</p>
     <div class="filters parts" id="fparts"></div>
     <div id="chlist"></div>
   </section>
 
   <section class="panel" id="p-real" role="tabpanel">
-    <h2 class="sec">The Real Ones</h2>
+    <h2 class="sec">🎭 The Real Ones</h2>
     <p class="lead">The famous flesh-and-blood Seths deciding what the name means at parties — plus the deep bench.</p>
     <div class="rgrid" id="rgrid"></div>
-    <h2 class="sec" style="margin-top:2.2rem">The Musicians</h2>
+    <h2 class="sec" style="margin-top:2.2rem">🎸 The Musicians</h2>
     <p class="lead">Even the singing Seths skew wordy, confessional, and cerebral.</p>
     <div class="rgrid" id="mgrid"></div>
-    <h2 class="sec">Honorary Mentions</h2>
+    <h2 class="sec">⭐ Honorary Mentions</h2>
     <div class="bench" id="bench" style="margin-top:1rem"></div>
   </section>
 
   <section class="panel" id="p-index" role="tabpanel">
-    <h2 class="sec">Look Up Your Name</h2>
+    <h2 class="sec">🔍 Look Up Your Name</h2>
     <p class="lead">Hollywood has already decided who you are. Search the index and find out.</p>
     <input class="search" id="ixsearch" type="search" placeholder="Type a name — Jack, Karen, Seth..." aria-label="Search names">
     <table class="big"><thead><tr><th>Name</th><th>Screen archetype</th></tr></thead><tbody id="ixbody"></tbody></table>
   </section>
 
   <section class="panel" id="p-quiz" role="tabpanel">
-    <h2 class="sec">Which Seth Are You?</h2>
+    <h2 class="sec">🎲 Which Seth Are You?</h2>
     <p class="lead">Five questions. One verdict. The casting director in your head already knows.</p>
     <div class="qbox" id="qbox"></div>
   </section>
@@ -314,13 +350,13 @@ footer{border-top:1px solid var(--line);text-align:center;padding:1.6rem;color:v
 </div>
 
 <div class="tpick" role="group" aria-label="Theme">
-  <button class="t-marquee" data-th="marquee" aria-pressed="true" title="Marquee" aria-label="Marquee theme"></button>
+  <button class="t-marquee" data-th="marquee" aria-pressed="false" title="Marquee" aria-label="Marquee theme"></button>
   <button class="t-grid" data-th="grid" aria-pressed="false" title="The Grid" aria-label="Grid theme"></button>
   <button class="t-pulp" data-th="pulp" aria-pressed="false" title="Pulp" aria-label="Pulp theme"></button>
   <button class="t-lumon" data-th="lumon" aria-pressed="false" title="Lumon" aria-label="Lumon theme"></button>
   <button class="t-midnight" data-th="midnight" aria-pressed="false" title="Midnight" aria-label="Midnight theme"></button>
   <button class="t-blueprint" data-th="blueprint" aria-pressed="false" title="Blueprint" aria-label="Blueprint theme"></button>
-  <button class="t-cabot" data-th="cabot" aria-pressed="false" title="Cabot Cove" aria-label="Cabot Cove theme"></button>
+  <button class="t-cabot" data-th="cabot" aria-pressed="true" title="Cabot Cove" aria-label="Cabot Cove theme"></button>
 
 </div>
 <footer>Choose your names carefully. Somebody's always casting.</footer>
@@ -330,7 +366,7 @@ const $ = s => document.querySelector(s);
 const el = (t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
 
 /* tabs */
-const TABS=[["board","The Board"],["timeline","Timeline"],["files","Case Files"],["book","Read the Book"],["real","Real Seths"],["index","Name Index"],["quiz","The Quiz"]];
+const TABS=[["board","🎯 The Board"],["timeline","🎞️ Timeline"],["files","🗂️ Case Files"],["book","📖 Read the Book"],["real","🎭 Real Seths"],["index","🔍 Name Index"],["quiz","🎲 The Quiz"]];
 const tabbar=$("#tabs");
 TABS.forEach(([id,label],ix)=>{
   const b=el("button","tab",label);b.setAttribute("role","tab");b.dataset.t=id;
@@ -345,10 +381,10 @@ $("#p-board").classList.add("on");
 
 /* stats */
 const seths=DATA.seths, span=seths[seths.length-1].year-seths[0].year;
-const stats=[[seths.length+1,"Seths on file"],[span+" yrs","Timeline span"],
- [DATA.chapters.length,"Chapters"],[seths.filter(s=>s.verdict==="Good").length,"Good guys"],
- [seths.filter(s=>s.verdict==="Dark").length+seths.filter(s=>s.verdict==="Tragic").length,"Dark & tragic"],
- [DATA.real.length+DATA.bench.length,"Real Seths"]];
+const stats=[[seths.length+1,"🎬 Seths on file"],[span+" yrs","📅 Timeline span"],
+ [DATA.chapters.length,"📚 Chapters"],[seths.filter(s=>s.verdict==="Good").length,"😇 Good guys"],
+ [seths.filter(s=>s.verdict==="Dark").length+seths.filter(s=>s.verdict==="Tragic").length,"💀 Dark & tragic"],
+ [DATA.real.length+DATA.bench.length,"🌍 Real Seths"]];
 stats.forEach(([v,l])=>$("#stats").appendChild(el("div","stat",`<b>${v}</b><span>${l}</span>`)));
 
 /* fork */
@@ -385,10 +421,28 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
 
 /* timeline */
 const strip=$("#strip");
-[...seths, DATA.sethi].sort((a,b)=>a.year-b.year).forEach(s=>{
+function gapWidth(g){return Math.max(30, Math.min(210, 22+g*5));}
+const tlSorted=[...seths, DATA.sethi].sort((a,b)=>a.year-b.year);
+let tlPrev=null;
+tlSorted.forEach(s=>{
+  if(tlPrev){
+    const gap=s.year-tlPrev.year;
+    const decadeChanged=Math.floor(tlPrev.year/10)!==Math.floor(s.year/10);
+    let label="";
+    if(decadeChanged) label+=`<div class="tl-decade">${Math.floor(s.year/10)*10}s</div>`;
+    if(gap>=4) label+=`<div class="tl-tag">+${gap} yrs</div>`;
+    const gEl=el("div","tl-gap",`<div class="tl-line-row"></div>${label}`);
+    gEl.style.width=gapWidth(gap)+"px";
+    strip.appendChild(gEl);
+  }
+  const vcls="v-"+(["Good","Gray","Dark","Tragic","Honorary"].includes(s.verdict)?s.verdict:"Gray");
+  const item=el("div","tl-item",`<div class="tl-dot-row"><span class="tl-dot ${vcls}"></span></div>`);
   const f=el("button","frame",`<div class="yr">${s.year}</div><div class="nm">${s.name}</div>
    <div class="wk">${s.work}</div><span class="more">Open file &rarr;</span>`);
-  f.onclick=()=>openDossier(s);strip.appendChild(f);
+  f.onclick=()=>openDossier(s);
+  item.appendChild(f);
+  strip.appendChild(item);
+  tlPrev=s;
 });
 
 /* case files */
