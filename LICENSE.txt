@@ -1,0 +1,18 @@
+Copyright © 2026 Seth J. Gillespie. All rights reserved.
+
+"The Name Game: What Hollywood Thinks About Seth" — manuscript, book edition,
+interactive dashboard, and all associated text and design in this repository
+— is the copyrighted work of Seth J. Gillespie.
+
+No part of this work may be reproduced, distributed, or transmitted in any
+form or by any means, including photocopying, recording, or other electronic
+or mechanical methods, without the prior written permission of the author,
+except in the case of brief quotations embodied in critical reviews and
+certain other noncommercial uses permitted by copyright law.
+
+All film, television, and other media properties discussed or referenced in
+this work are analyzed as commentary and criticism under fair-use principles.
+All related trademarks and character names remain the property of their
+respective owners.
+
+For permissions, contact: seth@sethgillespie.com
