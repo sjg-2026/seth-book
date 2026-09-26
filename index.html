@@ -290,7 +290,7 @@ footer{border-top:1px solid var(--line);text-align:center;padding:1.6rem;color:v
       <div class="fork-roster" id="froster"></div>
     </div>
     <h2 class="sec">💬 The Sentence</h2>
-    <p class="lead" style="font-size:1.05rem;color:#E8E4DA"><em>"Seth: clever, a little neurotic, more likable than dangerous — but watch him around unchecked power."</em></p>
+    <p class="lead" style="font-size:1.05rem;color:inherit"><em>"Seth: clever, a little neurotic, more likable than dangerous — but watch him around unchecked power."</em></p>
   </section>
 
   <section class="panel" id="p-timeline" role="tabpanel">
@@ -382,7 +382,7 @@ $("#p-board").classList.add("on");
 /* stats */
 const seths=DATA.seths, span=seths[seths.length-1].year-seths[0].year;
 const stats=[[seths.length+1,"🎬 Seths on file"],[span+" yrs","📅 Timeline span"],
- [DATA.chapters.length,"📚 Chapters"],[seths.filter(s=>s.verdict==="Good").length,"😇 Good guys"],
+ [DATA.chapters.filter(c=>c.part!=="Outro").length,"📚 Chapters"],[seths.filter(s=>s.verdict==="Good").length,"😇 Good guys"],
  [seths.filter(s=>s.verdict==="Dark").length+seths.filter(s=>s.verdict==="Tragic").length,"💀 Dark & tragic"],
  [DATA.real.length+DATA.bench.length,"🌍 Real Seths"]];
 stats.forEach(([v,l])=>$("#stats").appendChild(el("div","stat",`<b>${v}</b><span>${l}</span>`)));
